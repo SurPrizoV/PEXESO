@@ -1,0 +1,42 @@
+{
+    "name": "pexeso",
+    "version": "1.0.0",
+    "description": "Курсовая работа для online-института SKYPRO. Игра \"Pexeso\".",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "format": "prettier --write ./src/",
+        "lint:js": "eslint ./src/**/*.js",
+        "stylelint": "stylelint **/*.css",
+        "stylelint:fix": "stylelint **/*.css --fix",
+        "prepare": "husky install"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SurPrizoV/PEXESO.git"
+    },
+    "keywords": [
+        "Pexeso",
+        "VanillaJS"
+    ],
+    "author": "Roman Prizov",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/SurPrizoV/PEXESO/issues"
+    },
+    "homepage": "https://github.com/SurPrizoV/PEXESO#readme",
+    "devDependencies": {
+        "eslint": "^8.27.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "husky": "^8.0.2",
+        "prettier": "^2.7.1",
+        "stylelint": "^14.15.0",
+        "stylelint-config-prettier": "^9.0.4",
+        "stylelint-config-rational-order": "^0.1.2",
+        "stylelint-config-standard": "^29.0.0",
+        "stylelint-order": "^5.0.0",
+        "stylelint-prettier": "^2.0.0",
+        "stylelint-scss": "^4.3.0"
+    }
+}
