@@ -9,4 +9,3 @@ window.application = {
     },
     timers: [],
 };
-const app = document.querySelector(".app");
