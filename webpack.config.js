@@ -7,6 +7,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 module.exports = {
     entry: './src/index.js',
     mode: 'production',
+    devtool: 'source-map',
     module: {
         rules: [
             {
@@ -33,7 +34,7 @@ module.exports = {
     },
     plugins: [
         new CopyPlugin({
-            patterns: [{ from: './src/img', to: 'static' }],
+            patterns: [{ from: 'dist\static\cards\', to: 'static' }],
         }),
         new HtmlWebpackPlugin({
             template: './index.html',

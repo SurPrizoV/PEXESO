@@ -1,4 +1,3 @@
-import './application.js';
 import { chooseLevelBlock } from './blocks.js';
 import { gameBlock } from './blocks.js';
 import { cardBlock } from './blocks.js';

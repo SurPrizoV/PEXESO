@@ -1,9 +1,8 @@
-import './application.js';
 import cards from './lib/cardArray';
 import { gameScreen } from './screens.js';
 
 export function chooseLevelBlock(container) {
-    chooseLevelBlockArray = [];
+    let chooseLevelBlockArray = [];
     const chooseLevelDiv = document.createElement('div');
     chooseLevelDiv.classList.add('choose_level-div');
     chooseLevelBlockArray.push(chooseLevelDiv);
