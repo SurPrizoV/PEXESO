@@ -1,8 +1,13 @@
 import cards from './lib/cardArray';
 import { gameScreen } from './screens.js';
+import { youLooseScreen } from './screens.js';
+import { youWinScreen } from './screens.js';
+import { t } from './lib/timer.js';
+import { startTimer } from './lib/timer.js';
+import { stopTimer } from './lib/timer.js';
 
 export function chooseLevelBlock(container) {
-    let chooseLevelBlockArray = [];
+    let chooseLevelBlockArray: any[] = [];
     const chooseLevelDiv = document.createElement('div');
     chooseLevelDiv.classList.add('choose_level-div');
     chooseLevelBlockArray.push(chooseLevelDiv);
@@ -84,7 +89,7 @@ export function gameBlock(container) {
     gameTimerMenu.appendChild(gameTimerSek);
     const gameTimer = document.createElement('p');
     gameTimer.classList.add('game_timer');
-    gameTimer.textContent = '00.00';
+    gameTimer.textContent = t;
     gameMenu.appendChild(gameTimer);
     const gameMenuButton = document.createElement('button');
     gameMenuButton.classList.add('game_button');
@@ -92,12 +97,17 @@ export function gameBlock(container) {
     gameMenu.appendChild(gameMenuButton);
     container.appendChild(gameTimerMenu);
     container.appendChild(gameMenu);
+    gameMenuButton.addEventListener('click', () => {
+        location.reload();
+    });
 }
 
 export function cardBlock(container) {
     const cardField = document.createElement('div');
     cardField.classList.add('card_field');
-    const cardArray = [];
+    window.application.chosenCard = [];
+    window.application.winCounter = 0;
+    const cardArray: any[] = [];
 
     if (window.application.level == 'easy') {
         for (let i = 0; i < 3; i++) {
@@ -135,12 +145,12 @@ export function cardBlock(container) {
             card.setAttribute('src', value.card_upside);
         }
 
-        setTimeout(cardHidden, 3000);
+        setTimeout(cardHidden, 2500);
 
         card.addEventListener('click', () => {
             card.setAttribute('src', value.src);
             card.classList.add('card_animation');
-            window.application.chosenCard = [];
+            startTimer();
             if (window.application.chosenCard.length !== 2) {
                 window.application.chosenCard.push(card.id);
             }
@@ -149,21 +159,107 @@ export function cardBlock(container) {
                 window.application.chosenCard[0] ===
                     window.application.chosenCard[1]
             ) {
-                alert('Ты выиграл');
                 window.application.chosenCard = [];
+                window.application.winCounter++;
             }
             if (
                 window.application.chosenCard.length === 2 &&
                 window.application.chosenCard[0] !==
                     window.application.chosenCard[1]
             ) {
-                alert('Ты проиграл');
                 window.application.chosenCard = [];
+                window.application.screens['youLoose'] = youLooseScreen;
+                window.application.renderScreen('youLoose');
+                stopTimer();
+            }
+            if (
+                window.application.level === 'easy' &&
+                window.application.winCounter === 3
+            ) {
+                window.application.screens['youWin'] = youWinScreen;
+                window.application.renderScreen('youWin');
+                stopTimer();
+            }
+            if (
+                window.application.level === 'medium' &&
+                window.application.winCounter === 6
+            ) {
+                window.application.screens['youWin'] = youWinScreen;
+                window.application.renderScreen('youWin');
+                stopTimer();
+            }
+            if (
+                window.application.level === 'hard' &&
+                window.application.winCounter === 9
+            ) {
+                window.application.screens['youWin'] = youWinScreen;
+                window.application.renderScreen('youWin');
+                stopTimer();
             }
         });
     });
 
     container.appendChild(cardField);
+}
+
+export function youLooseBlock(container) {
+    let youLooseBlockArray: any[] = [];
+    const youLooseImg = document.createElement('img');
+    youLooseImg.setAttribute('src', 'static/loose.png');
+    youLooseImg.classList.add('loose_image');
+    youLooseBlockArray.push(youLooseImg);
+    const youLooseTitle = document.createElement('p');
+    youLooseTitle.classList.add('you_loose_title');
+    youLooseTitle.textContent = 'Вы проиграли!';
+    youLooseBlockArray.push(youLooseTitle);
+    const timeForPlay = document.createElement('p');
+    timeForPlay.classList.add('time_for_play');
+    timeForPlay.textContent = 'Затраченное время:';
+    youLooseBlockArray.push(timeForPlay);
+    const time = document.createElement('p');
+    time.classList.add('time');
+    time.textContent = window.application.finalTime;
+    youLooseBlockArray.push(time);
+    const youLooseButton = document.createElement('button');
+    youLooseButton.classList.add('you_loose_button');
+    youLooseButton.textContent = 'Играть снова';
+    youLooseBlockArray.push(youLooseButton);
+    youLooseButton.addEventListener('click', () => {
+        location.reload();
+    });
+    youLooseBlockArray.forEach((element) => {
+        container.appendChild(element);
+    });
+}
+
+export function youWinBlock(container) {
+    let youWinBlockArray: any[] = [];
+    const youWinImg = document.createElement('img');
+    youWinImg.setAttribute('src', 'static/win.png');
+    youWinImg.classList.add('win_image');
+    youWinBlockArray.push(youWinImg);
+    const youWinTitle = document.createElement('p');
+    youWinTitle.classList.add('you_win_title');
+    youWinTitle.textContent = 'Вы выиграли!';
+    youWinBlockArray.push(youWinTitle);
+    const timeForPlay = document.createElement('p');
+    timeForPlay.classList.add('time_for_play');
+    timeForPlay.textContent = 'Затраченное время:';
+    youWinBlockArray.push(timeForPlay);
+    const time = document.createElement('p');
+    time.classList.add('time');
+    time.textContent = window.application.finalTime;
+    youWinBlockArray.push(time);
+    const youWinButton = document.createElement('button');
+    youWinButton.classList.add('you_win_button');
+    youWinButton.textContent = 'Играть снова';
+    youWinBlockArray.push(youWinButton);
+    youWinButton.addEventListener('click', () => {
+        location.reload();
+    });
+    youWinBlockArray.forEach((element) => {
+        container.appendChild(element);
+    });
 }
 
 function shuffle(array) {
