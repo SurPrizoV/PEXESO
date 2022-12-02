@@ -132,7 +132,6 @@ body {
 }
 
 .choose_level-button:hover {
-    border: #004980;
     box-shadow: #004980 2px 2px 16px;
     transform: scale(1.02);
 }
@@ -211,15 +210,6 @@ body {
     padding: 48px 0 56px;
 }
 
-/* .card_field_medium {
-    max-width: 35%;
-}
-
-.card_field_hard {
-    padding-left: 250px;
-    max-width: 55%;
-} */
-
 .card {
     transition: all 0.3s;
 }
@@ -236,4 +226,145 @@ body {
 .card_animation {
     animation: flip-diagonal-2-br 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)
         both;
+}
+
+/* ЭКРАН ПРОИГРЫША */
+
+.app {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.end_of_game {
+    width: 480px;
+    height: 459px;
+    background: #c2f5ff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 160px;
+}
+
+.loose_image {
+    padding-top: 24px;
+}
+
+.you_loose_title {
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    color: #004980;
+}
+
+.time_for_play {
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    color: #000000;
+    padding-top: 20px;
+}
+
+.time {
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 72px;
+    color: #000000;
+    padding-bottom: 24px;
+}
+
+.you_loose_button {
+    width: 246px;
+    height: 50px;
+    background: #7AC100;
+    border-radius: 12px;
+    border: none;
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #FFFFFF;
+    transition: all 0.3s;
+}
+
+.you_loose_button:hover {
+    box-shadow: #004980 2px 2px 16px;
+    transform: scale(1.02);
+}
+
+/* ЭКРАН ВЫИГРЫША */
+
+.win_image {
+    padding-top: 24px;
+}
+
+.you_win_title {
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    color: #004980;
+}
+
+.time_for_play {
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    color: #000000;
+    padding-top: 20px;
+}
+
+.time {
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 72px;
+    color: #000000;
+    padding-bottom: 24px;
+}
+
+.you_win_button {
+    width: 246px;
+    height: 50px;
+    background: #7AC100;
+    border-radius: 12px;
+    border: none;
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #FFFFFF;
+    transition: all 0.3s;
+}
+
+.you_win_button:hover {
+    box-shadow: #004980 2px 2px 16px;
+    transform: scale(1.02);
 }

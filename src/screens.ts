@@ -1,8 +1,10 @@
 import { chooseLevelBlock } from './blocks.js';
 import { gameBlock } from './blocks.js';
 import { cardBlock } from './blocks.js';
+import { youLooseBlock } from './blocks.js';
+import { youWinBlock } from './blocks.js';
 
-const app = document.querySelector('.app');
+const app = document.querySelector('.app') as Element;
 export function chooseLevelScreen() {
     const chooseLevel = document.createElement('div');
     chooseLevel.classList.add('choose_level_screen');
@@ -26,4 +28,22 @@ export function gameScreen() {
 
     window.application.blocks['cardField'] = cardBlock;
     window.application.renderBlock('cardField', game);
+}
+
+export function youLooseScreen() {
+    app.innerHTML = '';
+    const loose = document.createElement('div');
+    loose.classList.add('end_of_game');
+    app.appendChild(loose);
+    window.application.blocks['youLoose'] = youLooseBlock;
+    window.application.renderBlock('youLoose', loose);
+}
+
+export function youWinScreen() {
+    app.innerHTML = '';
+    const win = document.createElement('div');
+    win.classList.add('end_of_game');
+    app.appendChild(win);
+    window.application.blocks['youWin'] = youWinBlock;
+    window.application.renderBlock('youWin', win);
 }
