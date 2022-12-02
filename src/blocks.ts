@@ -90,18 +90,17 @@ export function gameBlock(container) {
     let sec = 0;
     let min = 0;
     let timerID;
-    window.application.finalTime;
     function startTimer() {
         timer();
     }
-    setTimeout(startTimer, 2500);
+    setTimeout(startTimer, 5000);
     window.application.stopTimer = () => {
         clearTimeout(timerID);
         const finalTime =
             (min > 9 ? min : '0' + min) + ':' + (sec > 9 ? sec : '0' + sec);
         sec = 0;
         min = 0;
-        window.application.finalTime = finalTime;
+        return finalTime;
     };
     function tick() {
         sec++;
@@ -174,7 +173,7 @@ export function cardBlock(container) {
             card.setAttribute('src', value.card_upside);
         }
 
-        setTimeout(cardHidden, 2500);
+        setTimeout(cardHidden, 5000);
 
         card.addEventListener('click', () => {
             card.setAttribute('src', value.src);
@@ -246,7 +245,7 @@ export function youLooseBlock(container) {
     youLooseBlockArray.push(timeForPlay);
     const time = document.createElement('p');
     time.classList.add('time');
-    time.textContent = window.application.finalTime;
+    time.textContent = window.application.stopTimer();
     youLooseBlockArray.push(time);
     const youLooseButton = document.createElement('button');
     youLooseButton.classList.add('you_loose_button');
@@ -276,7 +275,7 @@ export function youWinBlock(container) {
     youWinBlockArray.push(timeForPlay);
     const time = document.createElement('p');
     time.classList.add('time');
-    time.textContent = window.application.finalTime;
+    time.textContent = window.application.stopTimer();
     youWinBlockArray.push(time);
     const youWinButton = document.createElement('button');
     youWinButton.classList.add('you_win_button');
