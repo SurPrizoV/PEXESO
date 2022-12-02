@@ -1,6 +1,5 @@
-import './application.js';
+import './application.ts';
 
-import './blocks.js';
-import './screens.js';
-import './lib/timer.js';
+import './blocks.ts';
+import './screens.ts';
 import './style.css';
