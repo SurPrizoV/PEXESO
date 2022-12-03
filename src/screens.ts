@@ -1,8 +1,8 @@
-import { chooseLevelBlock } from './blocks.js';
-import { gameBlock } from './blocks.js';
-import { cardBlock } from './blocks.js';
-import { youLooseBlock } from './blocks.js';
-import { youWinBlock } from './blocks.js';
+import { chooseLevelBlock } from './blocks';
+import { gameBlock } from './blocks';
+import { cardBlock } from './blocks';
+import { youLooseBlock } from './blocks';
+import { youWinBlock } from './blocks';
 
 const app = document.querySelector('.app') as Element;
 export function chooseLevelScreen() {

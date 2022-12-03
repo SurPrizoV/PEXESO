@@ -1,10 +1,7 @@
 import cards from './lib/cardArray';
-import { gameScreen } from './screens.js';
-import { youLooseScreen } from './screens.js';
-import { youWinScreen } from './screens.js';
-import { t } from './lib/timer.js';
-import { startTimer } from './lib/timer.js';
-import { stopTimer } from './lib/timer.js';
+import { gameScreen } from './screens';
+import { youLooseScreen } from './screens';
+import { youWinScreen } from './screens';
 
 export function chooseLevelBlock(container) {
     let chooseLevelBlockArray: any[] = [];
@@ -89,7 +86,38 @@ export function gameBlock(container) {
     gameTimerMenu.appendChild(gameTimerSek);
     const gameTimer = document.createElement('p');
     gameTimer.classList.add('game_timer');
-    gameTimer.textContent = t;
+    gameTimer.textContent = '00:00';
+    let sec = 0;
+    let min = 0;
+    let timerID;
+    function startTimer() {
+        timer();
+    }
+    setTimeout(startTimer, 5000);
+    window.application.stopTimer = () => {
+        clearTimeout(timerID);
+        const finalTime =
+            (min > 9 ? min : '0' + min) + ':' + (sec > 9 ? sec : '0' + sec);
+        sec = 0;
+        min = 0;
+        return finalTime;
+    };
+    function tick() {
+        sec++;
+        if (sec >= 60) {
+            sec = 0;
+            min++;
+        }
+    }
+    function add() {
+        tick();
+        gameTimer.textContent =
+            (min > 9 ? min : '0' + min) + ':' + (sec > 9 ? sec : '0' + sec);
+        timer();
+    }
+    function timer() {
+        timerID = setTimeout(add, 1000);
+    }
     gameMenu.appendChild(gameTimer);
     const gameMenuButton = document.createElement('button');
     gameMenuButton.classList.add('game_button');
@@ -145,12 +173,11 @@ export function cardBlock(container) {
             card.setAttribute('src', value.card_upside);
         }
 
-        setTimeout(cardHidden, 2500);
+        setTimeout(cardHidden, 5000);
 
         card.addEventListener('click', () => {
             card.setAttribute('src', value.src);
             card.classList.add('card_animation');
-            startTimer();
             if (window.application.chosenCard.length !== 2) {
                 window.application.chosenCard.push(card.id);
             }
@@ -170,7 +197,7 @@ export function cardBlock(container) {
                 window.application.chosenCard = [];
                 window.application.screens['youLoose'] = youLooseScreen;
                 window.application.renderScreen('youLoose');
-                stopTimer();
+                window.application.stopTimer();
             }
             if (
                 window.application.level === 'easy' &&
@@ -178,7 +205,7 @@ export function cardBlock(container) {
             ) {
                 window.application.screens['youWin'] = youWinScreen;
                 window.application.renderScreen('youWin');
-                stopTimer();
+                window.application.stopTimer();
             }
             if (
                 window.application.level === 'medium' &&
@@ -186,7 +213,7 @@ export function cardBlock(container) {
             ) {
                 window.application.screens['youWin'] = youWinScreen;
                 window.application.renderScreen('youWin');
-                stopTimer();
+                window.application.stopTimer();
             }
             if (
                 window.application.level === 'hard' &&
@@ -194,7 +221,7 @@ export function cardBlock(container) {
             ) {
                 window.application.screens['youWin'] = youWinScreen;
                 window.application.renderScreen('youWin');
-                stopTimer();
+                window.application.stopTimer();
             }
         });
     });
@@ -218,7 +245,7 @@ export function youLooseBlock(container) {
     youLooseBlockArray.push(timeForPlay);
     const time = document.createElement('p');
     time.classList.add('time');
-    time.textContent = window.application.finalTime;
+    time.textContent = window.application.stopTimer();
     youLooseBlockArray.push(time);
     const youLooseButton = document.createElement('button');
     youLooseButton.classList.add('you_loose_button');
@@ -248,7 +275,7 @@ export function youWinBlock(container) {
     youWinBlockArray.push(timeForPlay);
     const time = document.createElement('p');
     time.classList.add('time');
-    time.textContent = window.application.finalTime;
+    time.textContent = window.application.stopTimer();
     youWinBlockArray.push(time);
     const youWinButton = document.createElement('button');
     youWinButton.classList.add('you_win_button');
